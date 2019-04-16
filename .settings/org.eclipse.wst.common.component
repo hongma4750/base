@@ -2,7 +2,6 @@
     <wb-module deploy-name="BASE">
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
-        <wb-resource deploy-path="/" source-path="/src/main/webapp/WebContent"/>
         <property name="context-root" value="BASE"/>
         <property name="java-output-path" value="/BASE/build/classes"/>
     </wb-module>

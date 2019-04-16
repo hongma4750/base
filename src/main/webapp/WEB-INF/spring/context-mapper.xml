@@ -5,7 +5,7 @@
 
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
-		<property name="mapperLocations" value="classpath:/hongma/sqlmap/**/Menu_SqlMap.xml" />
+		<property name="mapperLocations" value="classpath:/base/sqlmap/**/*_SqlMap.xml" />
 	</bean>
 	
 	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
