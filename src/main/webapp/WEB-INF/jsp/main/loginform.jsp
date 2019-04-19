@@ -106,10 +106,27 @@
             
 //             var LoginErr01Msg = "${LoginErr01}";
 //             var LoginErr02Msg = "${LoginErr02}";
-			console.log('확인 먼저');
 
-            
-
+        	<c:choose>
+	            <c:when test="${!empty LoginErr01}">
+	            	alert('${LoginErr01}');
+	            </c:when>
+	            <c:when test="${!empty LoginErr02}">
+					if(confirm('이미 접속중입니다. 기존의 접속을 종료하시겠습니까?')){
+		                document.getElementById("frmLogin").action = "<c:url value='/relogin.do'/>";
+		                document.getElementById("frmLogin").submit();          
+					}
+	            </c:when>
+	            <c:when test="${!empty sso && sso == 'fail_userId'}">
+	            	console.log('test');
+	            	alert('해당 사용자가 존재하지 않습니다. 담당자에게 문의하세요.  ');
+	            </c:when>
+	        </c:choose>
+	        
+	        var data01 = '${sso}';
+	        if(data01 != null && data01 != ''){
+	        	console.log('tet!!!');
+	        }
         }
 
 //         function fnOpenMain(no){
@@ -187,8 +204,7 @@
 </script>
 </head>
 
-<body topmargin="0" marginwidth="0" marginheight="0" leftmargin="0" rightmargin="0" onload=""
-	style="background-color:#2b3640;">
+<body topmargin="0" marginwidth="0" marginheight="0" leftmargin="0" rightmargin="0" onload="fnInitForm()" style="background-color:#2b3640;">
 <!-- <form id="frmWork" name="frmWork" action=""  method="post"></form> -->
 <form id="frm" name="frm" action="/login.do"  method="post">
 	<div class="box">

@@ -73,6 +73,8 @@ public class LoginController  {
         System.out.println("userVO : "+userVO);
         if (StringUtil.null2void(userVO.getUserId()).equals("")){
             ModelAndView mav =  new ModelAndView("main/loginform");
+            mav.addObject("sso","file_userId");
+            
             return mav ;
         }
 //        if (userVO.getUserId() == null) return new ModelAndView(((null != skinInfo) ? skinInfo.getPathView() : "") + "/loginform");
