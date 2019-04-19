@@ -1,15 +1,17 @@
 package base.prj.common.login.web;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import base.frm.util.StringUtil;
 import base.prj.common.login.service.LoginService;
+import base.prj.userdep.user.service.UserVO;
 
 //import com.ubintis.common.util.StrUtil;
 
@@ -65,17 +67,14 @@ public class LoginController  {
      * @return
      * @throws Exception
      */
-//    @RequestMapping(value="/login.do")
-//    public ModelAndView login(HttpServletRequest request, HttpServletResponse response) throws Exception {
-//
-//    	UserVO userVO = new UserVO();
-//        bind(request, userVO); 
-//        SkinMstVO skinInfo = commonService.getSkinInfo();
-//        
-//        if (StringUtil.null2void(userVO.getUserId()).equals("")){
-//            ModelAndView mav =  new ModelAndView(((null != skinInfo) ? skinInfo.getPathView() : "") + "/loginform");
-//            return mav ;
-//        }
+    @RequestMapping(value="/login.do")
+    public ModelAndView login(@ModelAttribute UserVO userVO, HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+        System.out.println("userVO : "+userVO);
+        if (StringUtil.null2void(userVO.getUserId()).equals("")){
+            ModelAndView mav =  new ModelAndView("main/loginform");
+            return mav ;
+        }
 //        if (userVO.getUserId() == null) return new ModelAndView(((null != skinInfo) ? skinInfo.getPathView() : "") + "/loginform");
 //        String localIP = request.getRemoteAddr(); 
 //        UserVO userInfo = null;
@@ -94,8 +93,8 @@ public class LoginController  {
 //        else{
 //            userInfo = loginService.getUserInfo(userVO, true);
 //        }
-//        
-//        //사용자 정보가 없으면 로그인 페이지로 이동
+        
+        //사용자 정보가 없으면 로그인 페이지로 이동
 //        if(userInfo == null || !"N".equals(userInfo.getRtmYn())){
 //        	
 //        	/**
@@ -117,45 +116,45 @@ public class LoginController  {
 //            mav.addObject("uskin", uskin);
 //            return mav;
 //        }    
-//
-////        //사용자 등록후 최초 접속이라면 비밀번호 변경 팝업창 호출
-////        if(userInfo.getPwdChangYmd() == null || "".equals(userInfo.getPwdChangYmd())){
-////            ModelAndView mav =  new ModelAndView(((null != skinInfo) ? skinInfo.getPathView() : "") + "/loginform", "PwdChangYn", userVO.getUserId());
-////            UserSession uskin = new UserSession(null, skinInfo);
-////            mav.addObject("uskin", uskin);
-////            return mav;
-////        }
-////        //사용자 정보가 없으면 로그인 페이지로 이동
-////        if("Y".equals(userInfo.getPwdChangYn())){
-////        	
-////        	/**
-////        	 * 로그인 실패시 로그정보를 쌓는다.
-////        	 */
-////        	loadDate();
-////            LoginLogVO loginLogVO = new LoginLogVO();
-////            loginLogVO.setUserId(userVO.getUserId());
-////            loginLogVO.setCnctPath(request.getRequestURI());
-////            loginLogVO.setCnctStrtDd(SYSTEM.getInstance().getDate() + "" + SYSTEM.getInstance().getTime());
-////            loginLogVO.setCnctEndDd("");
-////            loginLogVO.setIpPath(request.getRemoteAddr());
-////            loginLogVO.setCnctYn("N");
-////            loginLogVO.setLoginYn("N");
-////            loginService.updateUserLogin(loginLogVO);
-////        	
-////            ModelAndView mav =  new ModelAndView(((null != skinInfo) ? skinInfo.getPathView() : "") + "/loginform", "PwdChangYn", userVO.getUserId());
-////            UserSession uskin = new UserSession(null, skinInfo);
-////            mav.addObject("uskin", uskin);
-////            return mav;
-////        }    
-//        
+
+//        //사용자 등록후 최초 접속이라면 비밀번호 변경 팝업창 호출
+//        if(userInfo.getPwdChangYmd() == null || "".equals(userInfo.getPwdChangYmd())){
+//            ModelAndView mav =  new ModelAndView(((null != skinInfo) ? skinInfo.getPathView() : "") + "/loginform", "PwdChangYn", userVO.getUserId());
+//            UserSession uskin = new UserSession(null, skinInfo);
+//            mav.addObject("uskin", uskin);
+//            return mav;
+//        }
+//        //사용자 정보가 없으면 로그인 페이지로 이동
+//        if("Y".equals(userInfo.getPwdChangYn())){
+//        	
+//        	/**
+//        	 * 로그인 실패시 로그정보를 쌓는다.
+//        	 */
+//        	loadDate();
+//            LoginLogVO loginLogVO = new LoginLogVO();
+//            loginLogVO.setUserId(userVO.getUserId());
+//            loginLogVO.setCnctPath(request.getRequestURI());
+//            loginLogVO.setCnctStrtDd(SYSTEM.getInstance().getDate() + "" + SYSTEM.getInstance().getTime());
+//            loginLogVO.setCnctEndDd("");
+//            loginLogVO.setIpPath(request.getRemoteAddr());
+//            loginLogVO.setCnctYn("N");
+//            loginLogVO.setLoginYn("N");
+//            loginService.updateUserLogin(loginLogVO);
+//        	
+//            ModelAndView mav =  new ModelAndView(((null != skinInfo) ? skinInfo.getPathView() : "") + "/loginform", "PwdChangYn", userVO.getUserId());
+//            UserSession uskin = new UserSession(null, skinInfo);
+//            mav.addObject("uskin", uskin);
+//            return mav;
+//        }    
+        
 //        String loginKey = userInfo.getUserId() + ";" + localIP;
-//        
-//        //Session 처리부분---------------------------------------------------/
+        
+        //Session 처리부분---------------------------------------------------/
 //        loginManager = LoginManager.getInstance();
 //        HttpSession httpSession = request.getSession(true);
 //        
 //        httpSession.setAttribute("DA_DVN", "1");
-//        
+        
 //        if (loginManager.isUsing(loginKey))
 //        {
 //            if(!loginManager.isDuplicateIP(loginKey)) {
@@ -169,33 +168,33 @@ public class LoginController  {
 //                return mav;
 //            }
 //        }
-//
+
 //        try {
 //            loginManager.printloginUsers();
 //            loginManager.setSession(httpSession, loginKey);
 //        }catch(Exception e) {
 //            System.out.println(e.getLocalizedMessage());
 //        }
-//        
+        
 //        String sDiv = StringUtil.getParam(request, "sDiv", "");
 //        if(sDiv.equals("saeall"))
 //        {
 //            logger.debug("CommonController >>>>>>>>>>> 접촉구분 : " + sDiv);
 //            logger.debug("CommonController >>>>>>>>>>> 세션유무 : "+loginManager.isUsing(userInfo.getUserId()));  
 //        }
-////        if(userInfo.getCnfmYn().equals("N")){
-////            UserSession userSession = new UserSession(userInfo, skinInfo);
-////            WebUtils.setSessionAttribute(request, "userSession", userSession);
-////            ModelAndView mav =  new ModelAndView(((null != skinInfo) ? skinInfo.getPathView() : "") + "/loginform", "userInfo", userInfo);
-////            UserSession uskin = new UserSession(null, skinInfo);
-////            mav.addObject("uskin", uskin);
-////            return mav;
-////        }else{
+//        if(userInfo.getCnfmYn().equals("N")){
+//            UserSession userSession = new UserSession(userInfo, skinInfo);
+//            WebUtils.setSessionAttribute(request, "userSession", userSession);
+//            ModelAndView mav =  new ModelAndView(((null != skinInfo) ? skinInfo.getPathView() : "") + "/loginform", "userInfo", userInfo);
+//            UserSession uskin = new UserSession(null, skinInfo);
+//            mav.addObject("uskin", uskin);
+//            return mav;
+//        }else{
 //            loginProcess(userInfo, skinInfo, request, response);
-//            return null;
-////        }
-//        
-//    }
+            return null;
+//        }
+        
+    }
 
     /**
      * 로그인(SSO)처리

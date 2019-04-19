@@ -24,14 +24,16 @@
 <%-- 	<script type="text/javascript" src="<c:url value="/html/jquery/jquery-1.11.1.min.js"/>"></script> --%>
 <%-- 	<script type='text/javascript' src="<c:url value="/html/js/queryloader.js"/>"></script>  --%>
 <%-- 	<script type="text/javascript" src="<c:url value="/html/js/jquery.tooltip.js"/>"></script>  --%>
-	<script type="text/javascript" src="/js/jQuery.js"/>
+	<script type="text/javascript" src="/js/jQuery.js"></script>
 
-<script type="text/javascript">
+	<script type="text/javascript">
     
-//         var issubmit = false;
+        var issubmit = false;
         
-//         function sendAfterCheck(oform){
+        function sendAfterCheck(oform){
 //             fnSave_Cookies();
+
+		//TODO validation check
 //             if($('#userId').val().length > 20){
 //         	    alert('아이디는 20글자까지 가능합니다.\n\r아이디를 확인해주세요.');
 //         	    $('#userId').focus();
@@ -52,8 +54,8 @@
 //                 document.getElementById("frmLogin").pwd.focus();
 //                 return false;
 //             }
-//             document.getElementById("frmLogin").submit();
-//         }
+            $('#frm').submit();
+        }
         
 //         function document_onKeyPress(evt){
 //             //IE uses this
@@ -92,24 +94,23 @@
     
 //             }
 //         }
+
         /**
          * 해당 화면이 onload이벤트시 처리하는 함수
          */
-//         function fnInitForm(){
+        function fnInitForm(){
 //             fnResetFrameSize();
-            
 //             fnBrowserHeight();
-            
 //             fnGetCookiesData(); 
-    
 //             top.document.title = '${uskin.siteName}';
             
 //             var LoginErr01Msg = "${LoginErr01}";
 //             var LoginErr02Msg = "${LoginErr02}";
+			console.log('확인 먼저');
 
             
 
-//         }
+        }
 
 //         function fnOpenMain(no){
 //         	document.getElementById("frmLogin").pwd.value = no;
@@ -190,142 +191,53 @@
 	style="background-color:#2b3640;">
 <!-- <form id="frmWork" name="frmWork" action=""  method="post"></form> -->
 <form id="frm" name="frm" action="/login.do"  method="post">
-
-<div class="box">
+	<div class="box">
 		<div class="input-group input-group-sm">
-		  <input type="text" class="form-control loginForm" placeholder="ID" aria-describedby="sizing-addon3">
+		  <input type="text" id="userId" name="userId" class="form-control loginForm" placeholder="ID" aria-describedby="sizing-addon3">
 		</div>
 		
 		<div style="height:10px;"></div>
 		<div class="input-group input-group-sm">
-		  <input type="text" class="form-control loginForm" placeholder="PASS" aria-describedby="sizing-addon3">
+		  <input type="password" id="pwd" name="pwd" class="form-control loginForm" placeholder="PASS" aria-describedby="sizing-addon3">
 		</div>
 		<div style="height:10px;"></div>
 		
-		<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false" style="width:80px;">
-		Login
+		<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false" style="width:80px;" onclick="return sendAfterCheck(this.form)">
+			Login
 		</button>	
 			
 		<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false" style="width:80px;">
-		Join
+			Join
 		</button>		
-<!--   <div class="container"> -->
-<!--     <label for="uname"><b>Username</b></label> -->
-<!--     <input type="text" placeholder="Enter Username" name="uname" required> -->
-
-<!--     <label for="psw"><b>Password</b></label> -->
-<!--     <input type="password" placeholder="Enter Password" name="psw" required> -->
-
-<!--     <button type="submit">Login</button> -->
-<!--   </div> -->
-
-<!--   <div class="container" style="background-color:#f1f1f1"> -->
-<!--     <button type="button" class="cancelbtn">Cancel</button> -->
-<!--     <span class="psw">Forgot <a href="#">password?</a></span> -->
-<!--   </div> -->
-  
-<!--   <div class="row margin"> -->
-<!--           <div class="input-field col s12"> -->
-<!--             <i class="mdi-social-person-outline prefix"></i> -->
-<!--             <i class="material-icons prefix">account_circle</i> -->
-<!--             <input id="username" name="username" type="text" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGP6zwAAAgcBApocMXEAAAAASUVORK5CYII=&quot;); cursor: auto;"/> -->
-<!--             <label for="username" data-error="wrong" class="center-align" data-success="right">Username</label>             -->
-<!--           </div> -->
-<!--         </div> -->
-</div>
-<!--     <p style="position:absolute;"> -->
-<%--        <c:if test="${!empty loginForwardAction}"> --%>
-<%--        <input type="hidden" id="forwardAction" name="forwardAction" value="<c:url value="${loginForwardAction}"/>"> --%>
-<%--        </c:if> --%>
-<!--     </p>         -->
-<%-- 	<table id="a" width="100%" height="100%" border="0" cellpadding="0" cellspacing="0" style="background:url(${uskin.skinImageFolder}/logindemo/back.png) repeat-x;" > --%>
-<!-- 	  <tr> -->
-<!-- 	    <td align="center"> -->
-<!-- 	      <tr> -->
-<!-- 	        <td>&nbsp;</td> -->
-<!-- 	        <td style="width:936px; height:100%;"> -->
-<!-- 	        로그인박스 S -->
-<!-- 	        <table style="width:936px; height:100%;" border="0" cellspacing="0" cellpadding="0"> -->
-<!-- 	          <tr style="height:180px;"> -->
-<!-- 	            <td style="vertical-align: top; padding-top: 20px;"> -->
-<%-- 	            	<img src="<c:url value="${uskin.skinImageFolder}/loginform/logo_hongma.png"/>"/> --%>
-<!-- 	            </td> -->
-<!-- 	          </tr> -->
-<!-- 	          <tr>  -->
-<!-- 	            <td style="height:396px; vertical-align: middle; text-align: center;"> -->
-<!-- 		            폼박스 S -->
-<%-- 		            <table style="margin-bottom: 200px;width:936px; height:396px; background:url(${uskin.skinImageFolder}/logindemo/loginback.png) no-repeat;" border="0" cellspacing="0" cellpadding="0"> --%>
-<!-- 		              <tr style="height: 180px;"> -->
-<!-- 		                <td colspan="3">&nbsp;</td> -->
-<!-- 		              </tr> -->
-<!-- 		              <tr style="height: 70px;"> -->
-<!-- 		                <td style="width: 540px;" rowspan="3">&nbsp;</td> -->
-<!-- 		                <td style="width: 240px; height: 70px; vertical-align: top;"> -->
-<%-- 		                	<c:choose> --%>
-<%-- 			                    <c:when test="${!empty userid}"> --%>
-<%-- 			                        <input type="text" name="userId" id="userId" style="width: 200px;" value="${userId }" maxlength="20" readOnly class="table_button" size="20" tabindex="1"  title="최대20자"> --%>
-<%-- 			                    </c:when> --%>
-<%-- 			                    <c:otherwise> --%>
-<!-- 			                         <input type="text" name="userId" id="userId" style="width: 200px;" value="R0006" maxlength="20" class="table_button" size="20" tabindex="1"  title="최대 20자"> -->
-<%-- 			                    </c:otherwise> --%>
-<%-- 			                </c:choose> --%>
-<!-- 		                </td> -->
-<!-- 		                <td rowspan="3" style="vertical-align: top; text-align: left; padding-left: 15px; padding-top: 8px;"> -->
-<%-- 		                	<img alt="로그인" src="<c:url value="${uskin.skinImageFolder}/logindemo/login.png"/>" style="cursor:pointer;" onclick="return sendAfterCheck(this.form);"/> --%>
-<!-- 		                </td> -->
-<!-- 		              </tr> -->
-<!-- 		              <tr style="height: 70px;"> -->
-<!-- 		                <td style="width: 240px; height: 70px; vertical-align: top;"> -->
-<!-- 		                	<input type="password" id="pwd" name="pwd" style="width: 200px;" value="redvoc1!" class="table_button" size="20" maxlength="16" tabindex="2" title="최대 16자" onkeydown="document_onKeyPress(event)"> -->
-<!-- 		                </td> -->
-<!-- 		              </tr> -->
-<!-- 		              <tr style="height: 76px;"> -->
-<!-- 		                <td>&nbsp;</td> -->
-<!-- 		              </tr> -->
-<!-- 		              <tr> -->
-<!-- 		                <td colspan="3" class="login_text_01"><input type="hidden" name="chkSaveId" id="chkSaveId"></td> -->
-<!-- 		              </tr> -->
-<!-- 		            </table> -->
-<!-- 		            폼박스 E -->
-<!-- 	            </td> -->
-<!-- 	            </tr> -->
-<!-- 	        </table> -->
-<!-- 	        로그인박스 E -->
-<!-- 	        </td> -->
-<!-- 	        <td>&nbsp;</td> -->
-<!-- 	      </tr> -->
-<!-- 	    </table> -->
-<!-- 	    </td> -->
-<!-- 	  </tr> -->
-<!-- 	</table> -->
+	</div>
 </form>
 <script type='text/javascript'>
-// try {
-//     // Frame구조가 있는지를 체크
-//     var booleanIframeValue = false;
-//     if (window.parent!=null) {
-//         booleanIframeValue = true;
-//     }
+try {
+    // Frame구조가 있는지를 체크
+    var booleanIframeValue = false;
+    if (window.parent!=null) {
+        booleanIframeValue = true;
+    }
 
-//     // popup인 경우를 체크    
-//     var booleanPopupValue = false;
-//     if (window.opener!=null) {
-//         booleanPopupValue = true;
-//     }
+    // popup인 경우를 체크    
+    var booleanPopupValue = false;
+    if (window.opener!=null) {
+        booleanPopupValue = true;
+    }
 
-//     if (booleanIframeValue){
-//         parent.setBizSubmit(false);
-//         try{parent.document.getElementById("divProg").style.display = 'none';}catch(e){}
-//     }
-//     else if (booleanPopupValue){
-//         opener.setBizSubmit(false);
-//         try{opener.document.getElementById("divProg").style.display = 'none';}catch(e){}
-//     }
-//     else{
-//         setBizSubmit(false);
-//         try{document.getElementById("divProg").style.display = 'none';}catch(e){}
-//     }           
-// }catch(e){}
+    if (booleanIframeValue){
+        parent.setBizSubmit(false);
+        try{parent.document.getElementById("divProg").style.display = 'none';}catch(e){}
+    }
+    else if (booleanPopupValue){
+        opener.setBizSubmit(false);
+        try{opener.document.getElementById("divProg").style.display = 'none';}catch(e){}
+    }
+    else{
+        setBizSubmit(false);
+        try{document.getElementById("divProg").style.display = 'none';}catch(e){}
+    }           
+}catch(e){}
 
 // $('input').tooltip({
 //     align: 'autoRight',
